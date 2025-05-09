@@ -1,14 +1,19 @@
+# solar_monitor.py
 import SoapySDR
 from SoapySDR import *
 import numpy as np
 import time
+import os
+from dotenv import load_dotenv
 from influxdb import InfluxDBClient
 
-INFLUX_HOST = "192.168.178.100"
-INFLUX_PORT = 8086
-INFLUX_DB = "influx"
-INFLUX_USER = "admin"
-INFLUX_PASS = "admin"
+load_dotenv()
+
+INFLUX_HOST = os.getenv("INFLUX_HOST")
+INFLUX_PORT = int(os.getenv("INFLUX_PORT"))
+INFLUX_DB = os.getenv("INFLUX_DB")
+INFLUX_USER = os.getenv("INFLUX_USER")
+INFLUX_PASS = os.getenv("INFLUX_PASS")
 
 FREQUENCIES_HZ = [7050000, 10136000, 14074000, 18100000, 29800000]
 SAMPLE_RATE = 2e6

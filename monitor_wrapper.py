@@ -1,19 +1,22 @@
+# monitor_wrapper.py
 import subprocess
 import time
 import datetime
+import os
+from dotenv import load_dotenv
 from pysolar.solar import get_altitude
 from influxdb import InfluxDBClient
 
-# Standort
+load_dotenv()
+
 LAT = 53.6987
 LON = 10.7656
 
-# InfluxDB-Zugang
-INFLUX_HOST = "192.168.178.100"
-INFLUX_PORT = 8086
-INFLUX_DB = "influx"
-INFLUX_USER = "admin"
-INFLUX_PASS = "admin"
+INFLUX_HOST = os.getenv("INFLUX_HOST")
+INFLUX_PORT = int(os.getenv("INFLUX_PORT"))
+INFLUX_DB = os.getenv("INFLUX_DB")
+INFLUX_USER = os.getenv("INFLUX_USER")
+INFLUX_PASS = os.getenv("INFLUX_PASS")
 
 def log_solar_altitude():
     now = datetime.datetime.now(datetime.timezone.utc)
